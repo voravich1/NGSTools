@@ -6,23 +6,24 @@ from scipy.stats import fisher_exact
 from pathlib import Path
 
 input_folder = "C:/Users/vorav/Desktop/opas_bgi_set2/test_post_ctk"
-p = Path("C:/Users/vorav/Desktop/opas_bgi_set2/ctk_post_hg38_n")
+#p = Path("C:/Users/vorav/Desktop/opas_bgi_set2/ctk_post_hg38_n")
+p = Path("/Volumes/2TBSeagateBackupPlus/opas_bgi_set2/analysis/new_run/ctk_post_virus_p")
 
-useable_read_pool_inf = p / "pool_inf_hg38_n_pool.bed"
-useable_read_pool_non = p / "pool_non_hg38_n_pool.bed"
-useable_read_sm_inf = p / "sm_inf_hg38_n_pool.bed"
-useable_read_sm_non = p / "sm_non_hg38_n_pool.bed"
+useable_read_pool_inf = p / "pool_inf_virus_p_pool.bed"
+useable_read_pool_non = p / "pool_non_virus_p_pool.bed"
+useable_read_sm_inf = p / "sm_inf_virus_p_pool.bed"
+useable_read_sm_non = p / "sm_non_virus_p_pool.bed"
 
-pool_inf_peak_bed = p / "pool_inf_hg38_n_pool_peak_sig.bed"
-pool_non_peak_bed = p / "pool_non_hg38_n_pool_peak_sig.bed"
+pool_inf_peak_bed = p / "pool_inf_virus_p_pool_peak_sig.bed"
+pool_non_peak_bed = p / "pool_non_virus_p_pool_peak_sig.bed"
 #sm_inf_peak_bed = p / "sm_virus_inf_r2_pool_peak_sig.bed"
 #sm_non_peak_bed = p / "sm_virus_non_r2_pool_peak_sig.bed"
 
 #union_bedgraph_ctk = "/drives/c/Users/vorav/Desktop/opas_bgi_set2/test_post_ctk/union.bedgraph"
-pool_inf_bedgraph = p / "pool_inf_hg38_n_pool.bedgraph"
-pool_non_bedgraph = p / "pool_non_hg38_n_pool.bedgraph"
-sm_inf_bedgraph = p / "sm_inf_hg38_n_pool.bedgraph"
-sm_non_bedgraph = p / "sm_non_hg38_n_pool.bedgraph"
+pool_inf_bedgraph = p / "pool_inf_virus_p_pool.bedgraph"
+pool_non_bedgraph = p / "pool_non_virus_p_pool.bedgraph"
+sm_inf_bedgraph = p / "sm_inf_virus_p_pool.bedgraph"
+sm_non_bedgraph = p / "sm_non_virus_p_pool.bedgraph"
 
 # Check peak File is empty or not
 if(os.stat(pool_inf_peak_bed).st_size == 0): # Will return true if empty
@@ -94,7 +95,7 @@ sm_non_count_dict = ctk_utils.createCountDictFromBedgraph(sm_non_bedgraph)
 ctk_utils.convert2rpmBedgraph(pool_inf_bedgraph,total_read_pool_inf)
 ctk_utils.convert2rpmBedgraph(pool_non_bedgraph,total_read_pool_non)
 ctk_utils.convert2rpmBedgraph(sm_inf_bedgraph,total_read_sm_inf)
-ctk_utils.convert2rpmBedgraph(sm_inf_bedgraph,total_read_sm_inf)
+ctk_utils.convert2rpmBedgraph(sm_non_bedgraph,total_read_sm_non)
 
 # Loop create universal dict count. Value column represent inf non_inf sm_inf sm_non_inf
 #first_flag = True
@@ -172,7 +173,7 @@ with open(pool_inf_peak_bed,"r") as pool_inf_peak:
         stat_inf.write(peak_id + "\t" + str(start) + "\t" + str(stop) + "\t"+ str(l2fold) + "\t" + str(oddsratio) + "\t" + str(p_value) + "\n")
 
         if(p_value<0.05):
-            sig_inf_peak.write(chromosome + "\t" + str(start) + "\t" + str(stop) + "\t" + str(rpm_treat_inf_peak) + "\n")
+            sig_inf_peak.write(chromosome + "\t" + str(start) + "\t" + str(stop) + "\t" + str(round((rpm_treat_inf_peak)/100000,2)) + "\n")  # we scale peak count down to 10^5 scale
 
 stat_inf.close()
 sig_inf_peak.close()
@@ -232,7 +233,7 @@ with open(pool_non_peak_bed,"r") as pool_non_peak:
         stat_non.write(peak_id + "\t" + str(start) + "\t" + str(stop) + "\t"+ str(l2fold) + "\t" + str(oddsratio) + "\t" + str(p_value) + "\n")
 
         if(p_value<0.05):
-            sig_non_peak.write(chromosome + "\t" + str(start) + "\t" + str(stop) + "\t" + str(rpm_treat_non_peak) + "\n")
+            sig_non_peak.write(chromosome + "\t" + str(start) + "\t" + str(stop) + "\t" + str(round((rpm_treat_non_peak)/100000,2)) + "\n")  # we scale peak count down to 10^5 scale
 
 stat_non.close()
 sig_non_peak.close()

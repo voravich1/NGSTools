@@ -20,6 +20,7 @@ def createCountDictFromBedgraph(bedgraphFileName):
     return count_dict
 
 def convert2rpmBedgraph(bedgraphFileName,totalread):
+    # we adjust rpm_count into scale (10^5). This will give us a more lower number on count but preserve the sense of rpm count
     p = Path(bedgraphFileName)
     inputFolder = Path(p.parent)
     fileName = p.stem
@@ -39,7 +40,7 @@ def convert2rpmBedgraph(bedgraphFileName,totalread):
                 start = int(count_data[1])
                 stop = int(count_data[2])
                 count = int(count_data[3].split("\n")[0])
-                rpm_count = round(count/rpm_factor)
+                rpm_count = round((count/rpm_factor)/100000,2) # adjust rpm count to 10^5 scale
                 bedgraphline = chr + "\t" + str(start) + "\t" + str(stop) + "\t" + str(rpm_count) + "\n"
                 bedgraphRPMFile.write(bedgraphline)
             else:
