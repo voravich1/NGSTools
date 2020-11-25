@@ -7,23 +7,42 @@ from pathlib import Path
 
 input_folder = "C:/Users/vorav/Desktop/opas_bgi_set2/test_post_ctk"
 #p = Path("C:/Users/vorav/Desktop/opas_bgi_set2/ctk_post_hg38_n")
-p = Path("/Volumes/2TBSeagateBackupPlus/opas_bgi_set2/analysis/new_run/ctk_post_virus_p")
+p = Path("/Volumes/10TBSeagateBackupPlus/NBT/opas_set1/analysis/res_ctk_part2_hg38_r2/ctk_post_hg38_n")
+#p = Path("/Volumes/2TBSeagateBackupPlus/opas_bgi_set2/analysis/new_run/ctk_post_hg38_n")
 
-useable_read_pool_inf = p / "pool_inf_virus_p_pool.bed"
-useable_read_pool_non = p / "pool_non_virus_p_pool.bed"
-useable_read_sm_inf = p / "sm_inf_virus_p_pool.bed"
-useable_read_sm_non = p / "sm_non_virus_p_pool.bed"
+################### Virus ##############################
+#useable_read_pool_inf = p / "pool_inf_virus_n_pool.bed"
+#useable_read_pool_non = p / "pool_non_virus_n_pool.bed"
+#useable_read_sm_inf = p / "sm_inf_virus_n_pool.bed"
+#useable_read_sm_non = p / "sm_non_virus_n_pool.bed"
 
-pool_inf_peak_bed = p / "pool_inf_virus_p_pool_peak_sig.bed"
-pool_non_peak_bed = p / "pool_non_virus_p_pool_peak_sig.bed"
-#sm_inf_peak_bed = p / "sm_virus_inf_r2_pool_peak_sig.bed"
-#sm_non_peak_bed = p / "sm_virus_non_r2_pool_peak_sig.bed"
+#pool_inf_peak_bed = p / "pool_inf_virus_n_pool_peak_sig.bed"
+#pool_non_peak_bed = p / "pool_non_virus_n_pool_peak_sig.bed"
+#(not use) sm_inf_peak_bed = p / "sm_virus_inf_r2_pool_peak_sig.bed"
+#(not use) sm_non_peak_bed = p / "sm_virus_non_r2_pool_peak_sig.bed"
 
 #union_bedgraph_ctk = "/drives/c/Users/vorav/Desktop/opas_bgi_set2/test_post_ctk/union.bedgraph"
-pool_inf_bedgraph = p / "pool_inf_virus_p_pool.bedgraph"
-pool_non_bedgraph = p / "pool_non_virus_p_pool.bedgraph"
-sm_inf_bedgraph = p / "sm_inf_virus_p_pool.bedgraph"
-sm_non_bedgraph = p / "sm_non_virus_p_pool.bedgraph"
+#pool_inf_bedgraph = p / "pool_inf_virus_n_pool.bedgraph"
+#pool_non_bedgraph = p / "pool_non_virus_n_pool.bedgraph"
+#sm_inf_bedgraph = p / "sm_inf_virus_n_pool.bedgraph"
+#sm_non_bedgraph = p / "sm_non_virus_n_pool.bedgraph"
+
+################## Human #############################
+useable_read_pool_inf = p / "pool_inf_hg38_n_pool.bed"
+useable_read_pool_non = p / "pool_non_hg38_n_pool.bed"
+useable_read_sm_inf = p / "sm_inf_hg38_n_pool.bed"
+useable_read_sm_non = p / "sm_non_hg38_n_pool.bed"
+
+pool_inf_peak_bed = p / "pool_inf_hg38_n_pool_peak.bed"
+pool_non_peak_bed = p / "pool_non_hg38_n_pool_peak.bed"
+#(not use) sm_inf_peak_bed = p / "sm_virus_inf_r2_pool_peak_sig.bed"
+#(not use) sm_non_peak_bed = p / "sm_virus_non_r2_pool_peak_sig.bed"
+
+#(not use)union_bedgraph_ctk = "/drives/c/Users/vorav/Desktop/opas_bgi_set2/test_post_ctk/union.bedgraph"
+pool_inf_bedgraph = p / "pool_inf_hg38_n_pool.bedgraph"
+pool_non_bedgraph = p / "pool_non_hg38_n_pool.bedgraph"
+sm_inf_bedgraph = p / "sm_inf_hg38_n_pool.bedgraph"
+sm_non_bedgraph = p / "sm_non_hg38_n_pool.bedgraph"
 
 # Check peak File is empty or not
 if(os.stat(pool_inf_peak_bed).st_size == 0): # Will return true if empty
